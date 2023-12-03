@@ -19,7 +19,7 @@ const enhancedPoster = computed(() => {
     >
         <div class="info__image">
             <img
-                :src="enhancedPoster !== 'N/A' ? enhancedPoster : '/src/assets/NonImage.jpg'"
+                :src="enhancedPoster !== 'N/A' ? enhancedPoster : '/NonImage.jpg'"
                 alt="movie-image"
             />
         </div>
