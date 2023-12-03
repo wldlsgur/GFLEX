@@ -24,9 +24,9 @@ export default createRouter({
                 },
             ],
         },
-        // {
-        //     path: '/:notFound(.*)',
-        //     component: NotFound,
-        // },
+        {
+            path: '/:notFound(.*)',
+            component: NotFound,
+        },
     ],
 });
