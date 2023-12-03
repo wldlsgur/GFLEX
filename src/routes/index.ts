@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import MainPage from './MainPage.vue';
 import SearchPage from './SearchPage.vue';
 import MovieInfoPage from './MovieInfoPage.vue';
+import NotFound from '~/components/common/NotFound.vue';
 
 export default createRouter({
     history: createWebHistory(),
@@ -22,6 +23,10 @@ export default createRouter({
                     component: MovieInfoPage,
                 },
             ],
+        },
+        {
+            path: '/:notFound(.*)',
+            component: NotFound,
         },
     ],
 });
