@@ -13,7 +13,7 @@ const createObserver = () => {
     observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
-                if (entry.isIntersecting && !movieStore.isLoading && observer) {
+                if (observer && entry.isIntersecting && !movieStore.isLoading) {
                     emit('show');
                 }
             });

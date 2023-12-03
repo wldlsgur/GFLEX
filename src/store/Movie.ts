@@ -33,11 +33,8 @@ export const useMovieStore = defineStore('movie', {
                     data: { Response, Search },
                 } = await axios.post('/api/axios', { params, method: 'GET' });
 
-                if (!Response) {
+                if (!Response || !Search) {
                     return;
-                }
-                if (!Search || Search.length === 0) {
-                    return (this.movies = []);
                 }
 
                 if (params.page === 1) {
