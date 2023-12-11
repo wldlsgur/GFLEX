@@ -18,7 +18,7 @@ const handleClick = () => {
         @click="handleClick"
     >
         <img
-            :src="Poster !== 'N/A' ? Poster : '/src/assets/NonImage.jpg'"
+            :src="Poster !== 'N/A' ? Poster : '/NonImage.jpg'"
             alt="movie-image"
         />
         <div class="movie-info">
