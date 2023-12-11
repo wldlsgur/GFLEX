@@ -52,3 +52,11 @@ export interface MovieDetailResponse {
     Website: string;
     Response: string;
 }
+
+export interface MovieStoreState {
+    isLoading: boolean;
+    page: number;
+    movies: MovieSummary[];
+    keyword: string;
+    movie: MovieDetailResponse | null;
+}

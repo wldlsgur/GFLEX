@@ -4,9 +4,11 @@ import { useRouter } from 'vue-router';
 import Icon from './common/Icon.vue';
 import { TITLE } from '~/constants/Logo.ts';
 import { useMovieStore } from '~/store/Movie';
+import { storeToRefs } from 'pinia';
 
 const router = useRouter();
 const movieStore = useMovieStore();
+const { keyword } = storeToRefs(movieStore);
 
 const $input = ref<HTMLInputElement | null>(null);
 
@@ -21,13 +23,11 @@ const handleInput = (e: Event) => {
     }
 };
 const handleSearch = () => {
-    const keyword = movieStore.keyword.trim();
-
-    if (!keyword) {
+    if (!keyword.value.trim()) {
         return;
     }
 
-    router.push({ name: 'Search', params: { keyword } });
+    router.push({ name: 'Search', params: { keyword: keyword.value.trim() } });
 };
 const focusOnInput = () => {
     const { value } = $input;
@@ -63,7 +63,7 @@ onMounted(() => {
                     ref="$input"
                     class="search__input"
                     placeholder="영화 이름을 검색하세요"
-                    :value="movieStore.keyword"
+                    :value="keyword"
                     @input="handleInput"
                 />
                 <Icon @click="handleSearch">SEARCH</Icon>

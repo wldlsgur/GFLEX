@@ -6,11 +6,11 @@ import { TITLE, DESCRIPTION } from '~/constants/Banner.ts';
     <div class="banner__container">
         <h1 class="banner__title">{{ TITLE }}</h1>
         <p
-            v-for="(desc, index) in DESCRIPTION"
-            :key="index"
+            v-for="{ key, description } in DESCRIPTION"
+            :key="key"
             class="banner__description"
         >
-            {{ desc }}
+            {{ description }}
         </p>
     </div>
 </template>

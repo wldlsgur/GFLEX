@@ -1,8 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import MainPage from './MainPage.vue';
-import SearchPage from './SearchPage.vue';
-import MovieInfoPage from './MovieInfoPage.vue';
-import NotFound from '~/components/common/NotFound.vue';
 
 export default createRouter({
     history: createWebHistory(),
@@ -10,23 +6,23 @@ export default createRouter({
         {
             name: 'Home',
             path: '/',
-            component: MainPage,
+            component: () => import('./MainPage.vue'),
         },
         {
             name: 'Search',
             path: '/search/:keyword',
-            component: SearchPage,
+            component: () => import('./SearchPage.vue'),
             children: [
                 {
                     name: 'Movie',
                     path: '/movie/:id',
-                    component: MovieInfoPage,
+                    component: () => import('./MovieInfoPage.vue'),
                 },
             ],
         },
         {
             path: '/:notFound(.*)',
-            component: NotFound,
+            component: () => import('~/components/common/NotFound.vue'),
         },
     ],
 });

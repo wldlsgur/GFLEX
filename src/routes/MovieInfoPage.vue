@@ -1,24 +1,25 @@
 <script lang="ts" setup>
-import { useMovieStore } from '~/store/Movie';
+import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
+import { useMovieStore } from '~/store/Movie';
 import MovieInfo from '~/components/MovieInfo.vue';
 
 const movieStore = useMovieStore();
+const { keyword } = storeToRefs(movieStore);
 const router = useRouter();
 
 const handleClick = (e: Event) => {
     const { target, currentTarget } = e;
-    const { keyword } = movieStore;
 
     if (target !== currentTarget) {
         return;
     }
 
-    if (!keyword) {
+    if (!keyword.value) {
         return router.push({ name: 'Home' });
     }
 
-    router.push({ name: 'Search', params: { keyword: movieStore.keyword } });
+    router.push({ name: 'Search', params: { keyword: keyword.value } });
 };
 </script>
 

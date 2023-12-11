@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useMovieStore } from '~/store/Movie';
 
 const movieStore = useMovieStore();
+const { movie, isLoading } = storeToRefs(movieStore);
 
 const enhancedPoster = computed(() => {
-    if (movieStore.movie.Poster) {
-        return movieStore.movie.Poster.replace('SX300', 'SX700');
+    if (movie.value?.Poster) {
+        return movie.value.Poster.replace('SX300', 'SX700');
     }
     return '';
 });
@@ -14,33 +16,33 @@ const enhancedPoster = computed(() => {
 
 <template>
     <div
-        v-if="!movieStore.isLoading"
+        v-if="!isLoading"
         class="info"
     >
         <div class="info__image">
             <img
-                :src="enhancedPoster !== 'N/A' ? enhancedPoster : '/NonImage.jpg'"
+                :src="enhancedPoster !== 'N/A' ? enhancedPoster : '/src/assets/NonImage.jpg'"
                 alt="movie-image"
             />
         </div>
         <div class="info__content">
             <div>
-                <h1>{{ movieStore.movie.Title }} /</h1>
-                <span>{{ movieStore.movie.Year }}</span>
+                <h1>{{ movie?.Title }} /</h1>
+                <span>{{ movie?.Year }}</span>
             </div>
             <div>
-                <span>{{ movieStore.movie.Language }} / </span>
-                <span>{{ movieStore.movie.Country }}</span>
+                <span>{{ movie?.Language }} / </span>
+                <span>{{ movie?.Country }}</span>
             </div>
 
-            <span>Released : {{ movieStore.movie.Released }}</span>
-            <span>Runtime : {{ movieStore.movie.Runtime }}</span>
-            <span>Genre : {{ movieStore.movie.Genre }}</span>
-            <span>Awards : {{ movieStore.movie.Awards }}</span>
-            <span>Director : {{ movieStore.movie.Director }}</span>
-            <span>Writer : {{ movieStore.movie.Writer }}</span>
-            <span>Actors : {{ movieStore.movie.Actors }}</span>
-            <p>Plot : {{ movieStore.movie.Plot }}</p>
+            <span>Released : {{ movie?.Released }}</span>
+            <span>Runtime : {{ movie?.Runtime }}</span>
+            <span>Genre : {{ movie?.Genre }}</span>
+            <span>Awards : {{ movie?.Awards }}</span>
+            <span>Director : {{ movie?.Director }}</span>
+            <span>Writer : {{ movie?.Writer }}</span>
+            <span>Actors : {{ movie?.Actors }}</span>
+            <p>Plot : {{ movie?.Plot }}</p>
         </div>
     </div>
 </template>

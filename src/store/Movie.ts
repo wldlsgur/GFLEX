@@ -1,19 +1,14 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import type {
-    MovieListRequest,
-    MovieDetailRequest,
-    MovieSummary,
-    MovieDetailResponse,
-} from '~/types/Movie';
+import type { MovieListRequest, MovieDetailRequest, MovieStoreState } from '~/types/Movie';
 
 export const useMovieStore = defineStore('movie', {
-    state: () => ({
-        isLoading: false as boolean,
-        page: 1 as number,
-        movies: [] as MovieSummary[],
-        keyword: '' as string,
-        movie: {} as MovieDetailResponse,
+    state: (): MovieStoreState => ({
+        isLoading: false,
+        page: 1,
+        movies: [],
+        keyword: '',
+        movie: null,
     }),
     getters: {},
     actions: {
@@ -37,12 +32,7 @@ export const useMovieStore = defineStore('movie', {
                     return;
                 }
 
-                if (params.page === 1) {
-                    this.movies = [...Search];
-                }
-                if (params.page !== 1) {
-                    this.movies.push(...Search);
-                }
+                this.movies = [...this.movies, ...Search];
             } catch (error) {
                 console.error(error);
             } finally {

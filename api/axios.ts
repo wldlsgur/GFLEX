@@ -20,7 +20,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     const { API_ADDRESS, API_KEY } = process.env;
     const { params, method = 'GET' }: RequestBody = req.body;
     const { data } = await axios({
-        url: `${API_ADDRESS}`,
+        url: API_ADDRESS,
         method,
         headers: { 'content-Type': 'application/json' },
         params: {
